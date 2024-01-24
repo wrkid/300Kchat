@@ -16,14 +16,14 @@ const LoginSection = () => {
     } else if ( name === 'password' ) {
       setPassword(v)
     }
-  }
+  };
 
   console.log(mail, password);
 
   return (
     <div className="login-section">
       <div className='login-section__inner'>
-        <img src={String(login)}></img>
+        <img src={String(login)} />
         <span>300K Chat</span>
           <FormInput 
             type='email'
