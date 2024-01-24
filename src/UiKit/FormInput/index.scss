@@ -1,4 +1,4 @@
-input {
+.form-input {
   width: 285px;
   height: 47px;
   border-radius: 9px;
@@ -13,4 +13,10 @@ input {
     margin-left: 20px;
     color: #C4C4C4;
   }
+}
+
+.form-input-label {
+  position: absolute;
+  right: 20px;
+  top: 3px;
 }
