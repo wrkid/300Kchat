@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import FormButton from '../../UiKit/FormButton/FormButton';
 import FormInput from '../../UiKit/FormInput';
+
 import './index.scss';
 import AppLabel300k from '../../UiKit/AppLabel300k';
 
 const login = require('../../assets/img/login.png');
+
 
 const LoginSection = () => {
 
