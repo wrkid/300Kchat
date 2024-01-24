@@ -15,7 +15,7 @@ const FormButton: React.FC<IFormButton> = ({color, text}) => {
   }
 
   return (
-    <button style={style}>{text}</button>
+    <button className='form-button' style={style}>{text}</button>
   )
 };
 
