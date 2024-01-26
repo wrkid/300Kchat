@@ -14,44 +14,43 @@ const LoginSection = () => {
   const [ password, setPassword ] = useState('');
   const [ secretPhrase, setSecretPhrase ] = useState('');
 
-  const handleInput = (name: string, v: string) => {
-    if (name === 'email') {
-      setMail(v)
+  const handleInput = (name: string, value: string) => {
+    if (name === 'login') {
+      setMail(value)
     } else if ( name === 'password' ) {
-      setPassword(v)
+      setPassword(value)
     } else if ( name === 'phrase' ) {
-      setSecretPhrase(v)
+      setSecretPhrase(value)
     }
   };
 
-  // const handleSubmit = () => {
-
-  // }
-
-  console.log(mail, password, secretPhrase);
+  const handleSubmit = () => {
+    console.log(mail, password, secretPhrase);
+  }
 
   return (
     <div className="login-section">
       <div className='login-section__inner'>
-        <img src={String(login)} />
+        <img src={String(login)} alt='login'/>
           <AppLabel300k size='medium'/>
           <FormInput 
-            type='email'
+            type='login'
             onChange={handleInput}
           />
           <FormInput 
             type='password'
             onChange={handleInput}
           />
-          <input
-            className='login-section__inner__input--secret-phrase' 
-            placeholder='Секретная фраза'
-            value={secretPhrase}
-            onChange={(e) => handleInput('phrase', e.target.value)}
-          />
           <div className='login-section__inner__buttons'>
-            <FormButton color='dark' text='Войти' />
-            <FormButton color='light' text='Регистрация' />
+            <FormButton 
+              color='dark' 
+              text='Войти'
+              onClick={handleSubmit}
+            />
+            <FormButton 
+              color='light' 
+              text='Регистрация' 
+            />
           </div>
       </div>
     </div>

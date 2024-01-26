@@ -15,6 +15,7 @@
   width: 374px;
   height: 90%;
   border-radius: 49px;
+  border-bottom-left-radius: 0;
   box-shadow: 0px 4px 14px 0px #000000AD;
   display: flex;
   flex-direction: column;
@@ -25,9 +26,10 @@
 }
 
 .login-section__inner__buttons {
+  width: 315px;
   display: flex;
-  justify-content: space-around;
-  margin: 0 20px;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .login-section__inner__input--secret-phrase {
