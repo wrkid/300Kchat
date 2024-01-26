@@ -1,8 +1,8 @@
 import './index.scss';
+import mailIcon from '../../assets/img/mail.png'
+import passwordIcon from '../../assets/img/lock.png'
+import nameIcon from '../../assets/img/name.png'
 
-const mailIcon = require('../../assets/img/mail.png');
-const passwordIcon = require('../../assets/img/lock.png');
-const nameIcon = require('../../assets/img/name.png');
 
 enum Etype {
   email = 'Почта',
@@ -54,7 +54,7 @@ const FormInput: React.FC<IFormInput> = ({onChange, type = 'login'}) => {
       />
       <label 
         className='form-input-label'
-        htmlFor={id}><img src={String(icon)} alt="icon"/></label>
+        htmlFor={id}><img src={icon} alt="icon"/></label>
     </div>
   )
 }
