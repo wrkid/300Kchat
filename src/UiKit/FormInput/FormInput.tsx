@@ -1,16 +1,8 @@
 import './index.scss';
 
-const mailIcon = require('../../assets/img/mail.png');
-const passwordIcon = require('../../assets/img/lock.png');
-const nameIcon = require('../../assets/img/name.png');
-
-enum Etype {
-  email = 'Почта',
-  password = 'Пароль',
-  password_repeat = 'Повтори пароль',
-   login = 'Логин',
-  name = 'Имя в чате'
-}
+import mailIcon from '../../assets/img/mail.png';
+import passwordIcon from '../../assets/img/lock.png';
+import nameIcon from '../../assets/img/name.png';
 
 interface IFormInput {
   type: string,
