@@ -6,7 +6,7 @@ import login from '../../assets/img/login.png';
 import './index.scss';
 import AppLabel300k from '../../UiKit/AppLabel300k';
 
-
+import login from '../../assets/img/login.png';
 
 const LoginSection = () => {
 

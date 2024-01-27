@@ -3,14 +3,10 @@ import mailIcon from '../../assets/img/mail.png'
 import passwordIcon from '../../assets/img/lock.png'
 import nameIcon from '../../assets/img/name.png'
 
+import mailIcon from '../../assets/img/mail.png';
+import passwordIcon from '../../assets/img/lock.png';
+import nameIcon from '../../assets/img/name.png';
 
-enum Etype {
-  email = 'Почта',
-  password = 'Пароль',
-  password_repeat = 'Повтори пароль',
-   login = 'Логин',
-  name = 'Имя в чате'
-}
 
 interface IFormInput {
   type: string,

@@ -7,6 +7,7 @@ const AuthPage = () => {
     <div className="auth-page">
       <LoginSection />
       <RegisterSection />
+      {/* <ResetSection /> */}
     </div>
   )
 }
