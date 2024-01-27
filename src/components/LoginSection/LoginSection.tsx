@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import FormButton from '../../UiKit/FormButton/FormButton';
 import FormInput from '../../UiKit/FormInput';
+import login from '../../assets/img/login.png';
 
 import './index.scss';
 import AppLabel300k from '../../UiKit/AppLabel300k';
@@ -30,7 +31,7 @@ const LoginSection = () => {
   return (
     <div className="login-section">
       <div className='login-section__inner'>
-        <img src={String(login)} alt='login'/>
+        <img src={login} alt='login'/>
           <AppLabel300k size='medium'/>
           <FormInput 
             type='login'

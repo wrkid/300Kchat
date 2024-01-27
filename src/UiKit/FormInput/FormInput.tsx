@@ -1,8 +1,12 @@
 import './index.scss';
+import mailIcon from '../../assets/img/mail.png'
+import passwordIcon from '../../assets/img/lock.png'
+import nameIcon from '../../assets/img/name.png'
 
 import mailIcon from '../../assets/img/mail.png';
 import passwordIcon from '../../assets/img/lock.png';
 import nameIcon from '../../assets/img/name.png';
+
 
 interface IFormInput {
   type: string,
@@ -46,7 +50,7 @@ const FormInput: React.FC<IFormInput> = ({onChange, type = 'login'}) => {
       />
       <label 
         className='form-input-label'
-        htmlFor={id}><img src={String(icon)} alt="icon"/></label>
+        htmlFor={id}><img src={icon} alt="icon"/></label>
     </div>
   )
 }
