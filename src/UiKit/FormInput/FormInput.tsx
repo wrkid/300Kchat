@@ -1,12 +1,10 @@
+import React from 'react';
+
 import './index.scss';
-import mailIcon from '../../assets/img/mail.png'
-import passwordIcon from '../../assets/img/lock.png'
-import nameIcon from '../../assets/img/name.png'
 
 import mailIcon from '../../assets/img/mail.png';
 import passwordIcon from '../../assets/img/lock.png';
 import nameIcon from '../../assets/img/name.png';
-
 
 interface IFormInput {
   type: string,

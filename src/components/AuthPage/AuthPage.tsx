@@ -1,3 +1,4 @@
+import React from 'react';
 import LoginSection from '../LoginSection';
 import RegisterSection from '../RegisterSection';
 import './AuthPage.scss';
