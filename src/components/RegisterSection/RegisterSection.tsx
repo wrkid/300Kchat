@@ -47,7 +47,9 @@ const RegisterSection = () => {
       "password": password
     };
 
-    await fetch('http://127.0.0.1:2001/auth/registration', {
+    console.log(body)
+
+    await fetch('http://127.0.0.1:2001/api/registration', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8'
