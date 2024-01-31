@@ -24,11 +24,11 @@ const LoginSection = () => {
 
   const handleSubmit = async () => {
     const body = {
-      "username": mail,
+      "login": mail,
       "password": password
     };
 
-    await fetch('http://127.0.0.1:2001/auth/login', {
+    await fetch('http://127.0.0.1:2001/api/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8'
