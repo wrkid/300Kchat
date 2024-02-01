@@ -1,16 +1,10 @@
+import React from 'react';
+
 import './index.scss';
-import mailIcon from '../../assets/img/mail.png'
-import passwordIcon from '../../assets/img/lock.png'
-import nameIcon from '../../assets/img/name.png'
 
-
-enum Etype {
-  email = 'Почта',
-  password = 'Пароль',
-  password_repeat = 'Повтори пароль',
-   login = 'Логин',
-  name = 'Имя в чате'
-}
+import mailIcon from '../../assets/img/mail.png';
+import passwordIcon from '../../assets/img/lock.png';
+import nameIcon from '../../assets/img/name.png';
 
 interface IFormInput {
   type: string,

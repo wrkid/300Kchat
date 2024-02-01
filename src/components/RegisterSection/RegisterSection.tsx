@@ -1,6 +1,6 @@
 import FormInput from "../../UiKit/FormInput";
 import AppLabel300k from "../../UiKit/AppLabel300k";
-import { useState } from "react";
+import React, { useState } from "react";
 import FormButton from "../../UiKit/FormButton/FormButton";
 
 import './index.scss'
@@ -35,8 +35,29 @@ const RegisterSection = () => {
     }
   };
 
-  const handleSubmit = () => {
-    console.log(login, name, password, passwordRepeat, phrase);
+  const handleSubmit = async () => {
+    if (password !== passwordRepeat) {
+      console.log('Пароли не совпадают');
+      // throw Error('Пароли не совпадают')
+    }
+
+    const body = {
+      "login": login,
+      "username": name,
+      "password": password
+    };
+
+    console.log(body)
+
+    await fetch('http://127.0.0.1:2001/api/registration', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+      },
+      body: JSON.stringify(body)
+    }).then(res => res.json())
+      .then(json => console.log(json))
+      .catch(err => console.log(err))
   }
   
   return (
@@ -53,7 +74,8 @@ const RegisterSection = () => {
           <FormInput type='password-repeat' onChange={handleInput}/>
           <input
             className='login-section__inner__input--secret-phrase' 
-            placeholder='Секретная фраза'
+            placeholder='Секретная фраза (Пока не работает)'
+            // сделать мидлвар на проверку из списка
             value={phrase}
             onChange={(e) => handleInput('phrase', e.target.value)}
           />
