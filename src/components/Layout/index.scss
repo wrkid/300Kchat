@@ -5,5 +5,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
 
+.ant-spin {
+  position: absolute !important;
+  margin: auto auto!important;
+  z-index: 1;
 }

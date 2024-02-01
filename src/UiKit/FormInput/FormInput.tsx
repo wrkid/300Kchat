@@ -37,6 +37,8 @@ const FormInput: React.FC<IFormInput> = ({onChange, type = 'login'}) => {
     onChange(type, newValue);
   }
 
+  type = type.split('-')[0]; // получение типа инпута без модификатора, например, 'repeat'
+
   return (
     <div style={{position: 'relative', width: '315px'}}>
       <input 
