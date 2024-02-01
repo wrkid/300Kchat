@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from "react-router-dom";
 
 import FormButton from '@/UiKit/FormButton/FormButton';
 import FormInput from '@/UiKit/FormInput';
 import login from '@/assets/img/login.png';
+import AppLabel300k from '../../UiKit/AppLabel300k';
 
 import './index.scss';
-import AppLabel300k from '../../UiKit/AppLabel300k';
+
 import { loginUser } from '@/store/actions/authActions';
 
 const LoginSection = () => {
@@ -36,29 +38,34 @@ const LoginSection = () => {
     dispatch(loginUser(body) as any)
   }
 
+  const navigate = useNavigate();
+
   return (
     <div className="login-section">
       <div className='login-section__inner'>
         <img src={login} alt='login'/>
           <AppLabel300k size='medium'/>
-          <FormInput 
-            type='login'
-            onChange={handleInput}
-          />
-          <FormInput 
-            type='password'
-            onChange={handleInput}
-          />
-          <div className='login-section__inner__buttons'>
-            <FormButton 
-              color='dark' 
-              text='Войти'
-              onClick={handleSubmit}
+          <div className='login-section__inner__form'>
+            <FormInput 
+              type='login'
+              onChange={handleInput}
             />
-            <FormButton 
-              color='light' 
-              text='Регистрация' 
+            <FormInput 
+              type='password'
+              onChange={handleInput}
             />
+            <div className='login-section__inner__buttons'>
+              <FormButton 
+                color='dark' 
+                text='Войти'
+                onClick={handleSubmit}
+              />
+              <FormButton 
+                color='light' 
+                text='Регистрация'
+                onClick={() => navigate('/registration')} 
+              />
+            </div>
           </div>
       </div>
     </div>
