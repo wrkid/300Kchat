@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import FormButton from '../../UiKit/FormButton/FormButton';
 import FormInput from '../../UiKit/FormInput';
 import login from '../../assets/img/login.png';
@@ -10,7 +10,7 @@ const LoginSection = () => {
 
   const [ mail, setMail ] = useState('');
   const [ password, setPassword ] = useState('');
-  const [ secretPhrase, setSecretPhrase ] = useState('');
+  const [ _, setSecretPhrase ] = useState('');
 
   const handleInput = (name: string, value: string) => {
     if (name === 'login') {
