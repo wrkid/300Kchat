@@ -9,7 +9,11 @@
   type = 'email' / 'password' / ... (default: email)
   
 #FormButton - кнопка формы
-  color = 'dark' (синяя) / 'light'(белая) (default: dark)
-  text - текст внутри кнопки
-  onClick -
-==============================
+
+color = 'dark' (синяя) / 'light'(белая) (default: dark)
+text - текст внутри кнопки
+onClick - //нужно сделать =============================
+
+###ROUTING
+/login - Авторизация
+/reg - Регистрация
