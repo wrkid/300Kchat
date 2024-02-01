@@ -1,9 +1,18 @@
 import FormInput from "../../UiKit/FormInput";
 import AppLabel300k from "../../UiKit/AppLabel300k";
-import React, { useState } from "react";
-import FormButton from "../../UiKit/FormButton/FormButton";
+import { useState } from "react";
+import { useDispatch } from 'react-redux'
+import { registerUser } from '../../store/actions/authActions';
+
+;import FormButton from "../../UiKit/FormButton/FormButton";
 
 import './index.scss'
+
+interface RegistrationData {
+  login: string,
+  username: string,
+  password: string
+}
 
 const RegisterSection = () => {
 
@@ -12,6 +21,8 @@ const RegisterSection = () => {
   const [ password, setPassword ] = useState('');
   const [ passwordRepeat, setPasswordRepeat ] = useState('');
   const [ phrase, setPhrase ] = useState('');
+
+  const dispatch = useDispatch();
 
   const handleInput = (name: string, value: string) => {
     switch (name) {
@@ -41,23 +52,13 @@ const RegisterSection = () => {
       // throw Error('Пароли не совпадают')
     }
 
-    const body = {
+    const body: RegistrationData = {
       "login": login,
       "username": name,
       "password": password
     };
 
-    console.log(body)
-
-    await fetch('http://127.0.0.1:2001/api/registration', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8'
-      },
-      body: JSON.stringify(body)
-    }).then(res => res.json())
-      .then(json => console.log(json))
-      .catch(err => console.log(err))
+    dispatch(registerUser(body) as any)
   }
   
   return (
