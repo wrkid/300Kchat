@@ -4,6 +4,7 @@ import './index.scss';
 
 
 const Layout: React.FC = () => {
+
   return (
     <div className='layout'>
       <Outlet />

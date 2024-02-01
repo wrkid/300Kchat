@@ -1,17 +1,7 @@
 import axios from 'axios';
+import { ILoginBody, ILogoutBody, IRegistrationBody } from '@/types/authTypes';
 
 const baseURL = 'http://localhost:2001/';
-
-interface IRegistrationBody {
-  login: string;
-  username: string;
-  password: string;
-};
-
-interface ILoginBody {
-  login: string,
-  password: string
-};
 
 const api = {
   registerUser: async (data: IRegistrationBody) => {
@@ -24,16 +14,15 @@ const api = {
 
       const registerPayload = {
         token: response.data.accessToken,
-        userInfo: {
-          login: response.data.user.login
-        }
+        userInfo: response.data.user
       }
 
       return registerPayload;
-    } catch (error) {
-      return error;
+    } catch (error: any) {
+      return error.response.data;
     }
   },
+
   loginUser: async (data: ILoginBody) => {
     try {
       const response = await axios.post(`${baseURL}api/login`, data, {
@@ -44,26 +33,26 @@ const api = {
 
       const loginPayload = {
         token: response.data.accessToken,
-        userInfo: {
-          login: response.data.user.login
-        }
+        userInfo: response.data.user
       }
 
       return loginPayload;
-    } catch (error) {
-      // Возвращаем ошибку, чтобы обработать в редьюсере
-      return error;
+    } catch (error: any) {
+      return error.response;
     }
   },
-  logoutUser: async () => {
+  
+  logoutUser: async (data: ILogoutBody) => {
     try {
-      // Отправляем запрос на сервер для logout
-      // Например, axios.post(`${baseURL}api/logout`);
+      await axios.post(`${baseURL}api/logout`, data, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
 
-      // В случае успешного logout возвращаем объект с типом "logout"
+      // В случае успешного logout возвращаем объект с типом "logout" но эт фигня надо править
       return { type: "logout" };
     } catch (error) {
-      // Возвращаем ошибку, чтобы обработать в редьюсере
       return error;
     }
   },

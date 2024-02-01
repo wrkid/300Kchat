@@ -1,10 +1,13 @@
 import { useState } from 'react';
-import FormButton from '../../UiKit/FormButton/FormButton';
-import FormInput from '../../UiKit/FormInput';
-import login from '../../assets/img/login.png';
+import { useDispatch } from 'react-redux';
+
+import FormButton from '@/UiKit/FormButton/FormButton';
+import FormInput from '@/UiKit/FormInput';
+import login from '@/assets/img/login.png';
 
 import './index.scss';
 import AppLabel300k from '../../UiKit/AppLabel300k';
+import { loginUser } from '@/store/actions/authActions';
 
 const LoginSection = () => {
 
@@ -22,21 +25,15 @@ const LoginSection = () => {
     }
   };
 
+  const dispatch = useDispatch();
+
   const handleSubmit = async () => {
     const body = {
       "login": mail,
       "password": password
     };
 
-    await fetch('http://127.0.0.1:2001/api/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8'
-      },
-      body: JSON.stringify(body)
-    }).then(res => res.json())
-      .then(json => console.log(json))
-      .catch(err => console.log(err))
+    dispatch(loginUser(body) as any)
   }
 
   return (

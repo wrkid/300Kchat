@@ -1,10 +1,10 @@
-import FormInput from "../../UiKit/FormInput";
-import AppLabel300k from "../../UiKit/AppLabel300k";
+import FormInput from "@/UiKit/FormInput";
+import AppLabel300k from "@/UiKit/AppLabel300k";
 import { useState } from "react";
 import { useDispatch } from 'react-redux'
-import { registerUser } from '../../store/actions/authActions';
+import { registerUser } from '@/store/actions/authActions';
 
-;import FormButton from "../../UiKit/FormButton/FormButton";
+;import FormButton from "@/UiKit/FormButton/FormButton";
 
 import './index.scss'
 
