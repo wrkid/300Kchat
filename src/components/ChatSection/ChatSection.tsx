@@ -10,6 +10,7 @@ import io from 'socket.io-client';
 import { useEffect, useState } from 'react';
 import { Message } from '@/types/messagesType';
 import { IUser } from '@/types/authTypes';
+import ChatMessage from '../ChatMessage';
 
 const ChatSection = () => {
   const [messages, setMessages] = useState<Message[]>([]);
@@ -59,11 +60,15 @@ const ChatSection = () => {
 
   const renderMessages = () => {
     return (
-      <ul>
-        {messages.map((msg) => (
-          <li key={msg._id}>{msg.content}</li>
-        ))}
-      </ul>
+        messages.map((msg) => {
+          let owner = false;
+            if (msg.userid === id) {
+              owner = true
+            }
+          return (
+          <ChatMessage key={msg._id} username={msg.username} content={msg.content} owner={owner}/>
+          )
+        })
     )
   }
 
@@ -82,7 +87,7 @@ const ChatSection = () => {
       </div>
       <div className="chat-section__inner">
         <div className='chat-section__inner__messages'>
-        {renderMessages()}  
+          {renderMessages()}  
         </div>
         <input 
           className='chat-section__inner__input'

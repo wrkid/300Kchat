@@ -32,9 +32,11 @@
 }
 
 .chat-section__inner__messages {
-  background-color: rgb(62, 169, 169);
   height: 80%;
   width: 100%;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .chat-section__inner__input {
