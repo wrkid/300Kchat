@@ -28,7 +28,6 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
-        <Route index element={<ChatRoute />}/>
         <Route path="/registration" element={<RequireAuth children={<RegistrationRoute/>}/>} />
         <Route path="/login" element={<RequireAuth children={<LoginRoute />}/>} />
         <Route path="/chat" element={

@@ -8,7 +8,6 @@ export const loginUser = createAsyncThunk(
   async (userData: ILoginBody): Promise<any> => {
     const response = await api.loginUser(userData);
     localStorage.setItem('token', response.data.accessToken);
-    console.log(response.data)
     return response.data;
   }
 );
@@ -23,10 +22,11 @@ export const registerUser = createAsyncThunk(
 );
 
 export const logoutUser = createAsyncThunk(
-  'auth/login',
+  'auth/logout',
   async (): Promise<void> => {
     const response = await api.logoutUser();
-    return response;
+    localStorage.removeItem('token')
+    console.log(response)
   }
 );
 
@@ -38,4 +38,5 @@ export const chechAuth = createAsyncThunk(
     return response.data;
   }
 )
+
 

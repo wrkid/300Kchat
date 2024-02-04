@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { chechAuth, loginUser, registerUser } from '../authActions/authActions';
+import { chechAuth, loginUser, logoutUser, registerUser } from '../authActions/authActions';
 
 import { AuthState } from '@/types/authTypes';
 
@@ -89,7 +89,33 @@ const authSlice = createSlice({
         state.isAuth = true;
         state.userInfo = action.payload.user;
       })
-      // давить Unauthorized
+      .addCase(chechAuth.rejected, (state, action: any) => {
+        state.loading = false;
+        state.error = true;
+        state.success = false;
+        // Обработка ошибки, например, сохранение текста ошибки
+        state.errorMessage = action.payload ? action.payload.errorMessage : 'Unknown error';
+      })
+      .addCase(logoutUser.pending, (state) => {
+        state.loading = true;
+        state.error = false;
+        state.success = false;
+      })
+      .addCase(logoutUser.fulfilled, (state) => {
+        state.loading = false;
+        state.error = false;
+        state.success = true;
+        state.isAuth = false;
+        state.userInfo = initialState.userInfo;
+      })
+      .addCase(logoutUser.rejected, (state, action: any) => {
+        state.loading = false;
+        state.error = true;
+        state.success = false;
+        // Обработка ошибки, например, сохранение текста ошибки
+        state.errorMessage = action.payload ? action.payload.errorMessage : 'Unknown error';
+      })
+      // давить logout
     }
 });
 
