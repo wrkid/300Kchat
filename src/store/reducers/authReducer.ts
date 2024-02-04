@@ -1,25 +1,20 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { registerUser } from '../actions/authActions';
+import { chechAuth, loginUser, logoutUser, registerUser } from '../authActions/authActions';
 
-interface AuthState {
-  loading: boolean;
-  error: boolean;
-  success: boolean;
-  token: string;
-  userInfo: {
-    login: string;
-  };
-  errorMessage?: string; // Добавляем опциональное свойство errorMessage
-}
+import { AuthState } from '@/types/authTypes';
 
 const initialState: AuthState = {
   loading: false,
   error: false,
   success: false,
-  token: '',
+  isAuth: false,
   userInfo: {
     login: '',
-    // username: '',
+    id: '',
+    username: '', 
+    // на бэке присылает только логин и id, 
+    // добавить username на бэке
+    // и потом когда-ниубдь в далеком будущем url изображения профиля
   }
 };
 
@@ -35,15 +30,16 @@ const authSlice = createSlice({
         state.success = false;
         state.userInfo = {
           login: '',
+          id: '',
+          username: ''
         }
       })
       .addCase(registerUser.fulfilled, (state, action) => {
-        console.log(action.payload)
         state.loading = false;
         state.error = false;
         state.success = true;
-        state.token = action.payload.token;
-        state.userInfo = action.payload.userInfo;
+        state.isAuth = true;
+        state.userInfo = action.payload.user;
       })
       .addCase(registerUser.rejected, (state, action) => {
         state.loading = false;
@@ -51,7 +47,75 @@ const authSlice = createSlice({
         state.success = false;
         // Обработка ошибки, например, сохранение текста ошибки
         state.errorMessage = action.error.message;
-      });
+      })
+      .addCase(loginUser.pending, (state) => {
+        state.loading = true;
+        state.error = false;
+        state.success = false;
+        state.userInfo = {
+          login: '',
+          id: '',
+          username: ''
+        }
+      })
+      .addCase(loginUser.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = false;
+        state.success = true;
+        state.isAuth = true;
+        state.userInfo = action.payload.user;
+      })
+      .addCase(loginUser.rejected, (state, action: any) => {
+        state.loading = false;
+        state.error = true;
+        state.success = false;
+        // Обработка ошибки, например, сохранение текста ошибки
+        state.errorMessage = action.payload ? action.payload.errorMessage : 'Unknown error';
+      })
+      .addCase(chechAuth.pending, (state) => {
+        state.loading = true;
+        state.error = false;
+        state.success = false;
+        state.userInfo = {
+          login: '',
+          id: '',
+          username: ''
+        }
+      })
+      .addCase(chechAuth.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = false;
+        state.success = true;
+        state.isAuth = true;
+        state.userInfo = action.payload.user;
+      })
+      .addCase(chechAuth.rejected, (state, action: any) => {
+        state.loading = false;
+        state.error = true;
+        state.success = false;
+        // Обработка ошибки, например, сохранение текста ошибки
+        state.errorMessage = action.payload ? action.payload.errorMessage : 'Unknown error';
+      })
+      .addCase(logoutUser.pending, (state) => {
+        state.loading = true;
+        state.error = false;
+        state.success = false;
+      })
+      .addCase(logoutUser.fulfilled, (state) => {
+        state.loading = false;
+        state.error = false;
+        state.success = true;
+        state.isAuth = false;
+        state.userInfo = initialState.userInfo;
+      })
+      .addCase(logoutUser.rejected, (state, action: any) => {
+        state.loading = false;
+        state.error = true;
+        state.success = false;
+        // Обработка ошибки, например, сохранение текста ошибки
+        state.errorMessage = action.payload ? action.payload.errorMessage : 'Unknown error';
+      })
+      // давить logout
     }
 });
 

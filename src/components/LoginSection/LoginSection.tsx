@@ -1,16 +1,23 @@
 import { useState } from 'react';
-import FormButton from '../../UiKit/FormButton/FormButton';
-import FormInput from '../../UiKit/FormInput';
-import login from '../../assets/img/login.png';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from "react-router-dom";
+
+import FormButton from '@/UiKit/FormButton/FormButton';
+import FormInput from '@/UiKit/FormInput';
+import login from '@/assets/img/login.png';
+import AppLabel300k from '../../UiKit/AppLabel300k';
 
 import './index.scss';
-import AppLabel300k from '../../UiKit/AppLabel300k';
+
+import { loginUser } from '@/store/authActions/authActions';
 
 const LoginSection = () => {
 
   const [ mail, setMail ] = useState('');
   const [ password, setPassword ] = useState('');
   const [ _, setSecretPhrase ] = useState('');
+
+  const navigate = useNavigate();
 
   const handleInput = (name: string, value: string) => {
     if (name === 'login') {
@@ -22,21 +29,15 @@ const LoginSection = () => {
     }
   };
 
+  const dispatch = useDispatch();
+
   const handleSubmit = async () => {
     const body = {
       "login": mail,
       "password": password
     };
 
-    await fetch('http://127.0.0.1:2001/api/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8'
-      },
-      body: JSON.stringify(body)
-    }).then(res => res.json())
-      .then(json => console.log(json))
-      .catch(err => console.log(err))
+    dispatch(loginUser(body) as any)
   }
 
   return (
@@ -44,24 +45,27 @@ const LoginSection = () => {
       <div className='login-section__inner'>
         <img src={login} alt='login'/>
           <AppLabel300k size='medium'/>
-          <FormInput 
-            type='login'
-            onChange={handleInput}
-          />
-          <FormInput 
-            type='password'
-            onChange={handleInput}
-          />
-          <div className='login-section__inner__buttons'>
-            <FormButton 
-              color='dark' 
-              text='Войти'
-              onClick={handleSubmit}
+          <div className='login-section__inner__form'>
+            <FormInput 
+              type='login'
+              onChange={handleInput}
             />
-            <FormButton 
-              color='light' 
-              text='Регистрация' 
+            <FormInput 
+              type='password'
+              onChange={handleInput}
             />
+            <div className='login-section__inner__buttons'>
+              <FormButton 
+                color='dark' 
+                text='Войти'
+                onClick={handleSubmit}
+              />
+              <FormButton 
+                color='light' 
+                text='Регистрация'
+                onClick={() => navigate('/registration')} 
+              />
+            </div>
           </div>
       </div>
     </div>

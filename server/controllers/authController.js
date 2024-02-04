@@ -1,11 +1,11 @@
-const User = require('./models/User');
+const User = require('../models/User');
 const bcrypt = require('bcryptjs');
-const UserService = require('./service/user-service');
-const UserDto = require('./dtos/user-dto');
-const tokenService = require('./service/token-service');
+const UserService = require('../service/user-service');
+const UserDto = require('../dtos/user-dto');
+const tokenService = require('../service/token-service');
 const { validationResult }  = require('express-validator');
-const ApiError = require('./exceptions/api-error');
-const userService = require('./service/user-service');
+const ApiError = require('../exceptions/api-error');
+const userService = require('../service/user-service');
 
 class authController {
 
@@ -59,7 +59,7 @@ class authController {
   async refresh (req, res, next) {
     try {
       const {refreshToken} = req.cookies;
-      const userData = await UserService.refresh(login, password);
+      const userData = await UserService.refresh(refreshToken);
       res.cookie('refreshToken', userData.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true}) // 30 дней создаем рефреш куки
       return res.status(200).json(userData); // возвращем на клиента токены и данные
     } catch (err) {

@@ -1,10 +1,11 @@
-import FormInput from "../../UiKit/FormInput";
-import AppLabel300k from "../../UiKit/AppLabel300k";
 import { useState } from "react";
 import { useDispatch } from 'react-redux'
-import { registerUser } from '../../store/actions/authActions';
+import { registerUser } from '@/store/authActions/authActions';
+import { useNavigate } from "react-router-dom";
 
-;import FormButton from "../../UiKit/FormButton/FormButton";
+import FormInput from "@/UiKit/FormInput";
+import AppLabel300k from "@/UiKit/AppLabel300k";
+;import FormButton from "@/UiKit/FormButton/FormButton";
 
 import './index.scss'
 
@@ -47,10 +48,11 @@ const RegisterSection = () => {
   };
 
   const handleSubmit = async () => {
-    if (password !== passwordRepeat) {
-      console.log('Пароли не совпадают');
-      // throw Error('Пароли не совпадают')
-    }
+    // if (password !== passwordRepeat) {
+    //   console.log(password, passwordRepeat)
+    //   console.log('Пароли не совпадают');
+    //   // throw Error('Пароли не совпадают')
+    // }
 
     const body: RegistrationData = {
       "login": login,
@@ -60,6 +62,8 @@ const RegisterSection = () => {
 
     dispatch(registerUser(body) as any)
   }
+
+  const navigate = useNavigate();
   
   return (
     <div className="login-section">
@@ -84,6 +88,7 @@ const RegisterSection = () => {
             <FormButton 
               color='light' 
               text='Войти'
+              onClick={() => navigate('/login')}
             />
             <FormButton 
               color='dark' 

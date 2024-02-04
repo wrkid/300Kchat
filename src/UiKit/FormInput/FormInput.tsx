@@ -23,11 +23,9 @@ const FormInput: React.FC<IFormInput> = ({onChange, type = 'login'}) => {
 
 
   const icon = 
-    type === 'email' ? mailIcon : 
-    type === 'login' ? mailIcon :
+    type === 'email' || "login" ? mailIcon : 
     type === 'name' ? nameIcon :
-    type === 'password' ? passwordIcon :
-    type === 'password-repeat' ? passwordIcon :
+    type === 'password' || 'password-repeat' ? passwordIcon :
     mailIcon;
 
   const id = `${type}${Math.random()*10}`
@@ -36,6 +34,8 @@ const FormInput: React.FC<IFormInput> = ({onChange, type = 'login'}) => {
     const newValue = e.target.value;
     onChange(type, newValue);
   }
+
+  type = type.split('-')[0]; // получение типа инпута без модификатора, например, 'repeat'
 
   return (
     <div style={{position: 'relative', width: '315px'}}>
