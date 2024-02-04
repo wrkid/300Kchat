@@ -1,11 +1,7 @@
-export interface ChatMessage {
+export interface IMessage {
+  _id: string;
   username: string;
   userid: string;
   content: string;
   timestamp: Date;
-}
-
-export interface Message {
-  _id: string;
-  content: string;
 }

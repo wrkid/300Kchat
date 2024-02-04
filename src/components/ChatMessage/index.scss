@@ -1,20 +1,26 @@
 .chat-message {
-  width: 371px;
-  min-height: 87px;
-  border-radius: 20px;
-  background-color: #ABE1FF;
   display: flex;
+  width: 400px;
+  flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 5px;
-  margin: 10px;
   align-self: flex-end;
+  margin: 5px 15px;
 }
 
 .chat-message__content {
-  width: 80%;
+  width: 100%;
+  min-height: 50px;
+  border-radius: 20px;
+  display: flex;
+  & span {
+    margin: 10px;
+    font-size: 18px;
+    word-wrap:normal;
+  }
 }
 
 .chat-message__user-info {
-  margin-left: 10px;
+  align-self: flex-start;
+  margin-bottom: 5px;
 }

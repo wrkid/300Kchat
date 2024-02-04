@@ -1,19 +1,24 @@
-import AppLabel300k from '@/UiKit/AppLabel300k';
-import './index.scss';
-
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import axios from 'axios';
+import io from 'socket.io-client';
+
+import './index.scss';
+
+import AppLabel300k from '@/UiKit/AppLabel300k';
 import FormButton from '@/UiKit/FormButton/FormButton';
+
+import sendit from '../../assets/img/sendit.svg';
+
 import { logoutUser } from '@/store/authActions/authActions';
 
-import io from 'socket.io-client';
-import { useEffect, useState } from 'react';
-import { Message } from '@/types/messagesType';
 import { IUser } from '@/types/authTypes';
+import { IMessage } from '@/types/messagesType';
+
 import ChatMessage from '../ChatMessage';
 
 const ChatSection = () => {
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [messages, setMessages] = useState<IMessage[]>([]);
   const [value, setValue] = useState('');
   const {id, username} = useSelector<any, IUser>(state => state.auth.userInfo);
   const dispatch = useDispatch();
@@ -22,7 +27,17 @@ const ChatSection = () => {
     withCredentials: true,
   });
 
+  const messagesRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
+    // При обновлении messages, прокручиваем блок вниз
+    if (messagesRef.current) {
+      messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
+    }
+  }, [messages]);
+  
+  useEffect(() => {
+    // получаем сообщения с бд
     const fetchMessages = async () => {
       try {
         const response = await axios.get('http://localhost:2001/chat/messages');
@@ -33,7 +48,7 @@ const ChatSection = () => {
     };
 
     fetchMessages();
-    //подписываемся на событие нового сообщения
+    // подписываемся на событие нового сообщения и пушим в стейт
     socket.on('chat message', (message) => {
       setMessages((prevMessages) => [...prevMessages, message]);
     });
@@ -55,6 +70,7 @@ const ChatSection = () => {
     // отправляем сообщение на сервер
     socket.emit('chat message', messageData);
 
+    // чистим инпут
     setValue('');
   };
 
@@ -86,15 +102,19 @@ const ChatSection = () => {
         <FormButton color='leight' text="Выйти" onClick={() => dispatch(logoutUser() as any)}/>
       </div>
       <div className="chat-section__inner">
-        <div className='chat-section__inner__messages'>
+        <div ref={messagesRef} className='chat-section__inner__messages'>
           {renderMessages()}  
         </div>
-        <input 
-          className='chat-section__inner__input'
-          value={value} 
-          onChange={(e) => setValue(e.target.value)} 
-          onKeyDown={handleKeyDown}
-        />
+        <div className='chat-section__inner__bottom'>
+          <input 
+            className='chat-section__inner__bottom__input'
+            placeholder='Введи вообщение тут...'
+            value={value} 
+            onChange={(e) => setValue(e.target.value)} 
+            onKeyDown={handleKeyDown}
+          />
+          <button><img src={sendit}/></button>
+        </div>
       </div>
     </div>
   );
