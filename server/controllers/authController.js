@@ -1,11 +1,11 @@
-const User = require('./models/User');
+const User = require('../models/User');
 const bcrypt = require('bcryptjs');
-const UserService = require('./service/user-service');
-const UserDto = require('./dtos/user-dto');
-const tokenService = require('./service/token-service');
+const UserService = require('../service/user-service');
+const UserDto = require('../dtos/user-dto');
+const tokenService = require('../service/token-service');
 const { validationResult }  = require('express-validator');
-const ApiError = require('./exceptions/api-error');
-const userService = require('./service/user-service');
+const ApiError = require('../exceptions/api-error');
+const userService = require('../service/user-service');
 
 class authController {
 

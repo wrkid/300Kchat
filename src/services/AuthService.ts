@@ -1,7 +1,7 @@
 import axios , {AxiosResponse} from 'axios';
 import { AuthResponse, ILoginBody, IRegistrationBody } from '@/types/authTypes';
 
-export const baseURL = 'http://localhost:2001/api';
+export const baseURL = 'http://localhost:2001/auth';
 
 const $api = axios.create({
   withCredentials: true,
