@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { loginUser, registerUser } from '../actions/authActions';
+import { chechAuth, loginUser, registerUser } from '../authActions/authActions';
 
 import { AuthState } from '@/types/authTypes';
 
@@ -7,11 +7,11 @@ const initialState: AuthState = {
   loading: false,
   error: false,
   success: false,
-  token: '',
+  isAuth: false,
   userInfo: {
     login: '',
     id: '',
-    // username: '', 
+    username: '', 
     // на бэке присылает только логин и id, 
     // добавить username на бэке
     // и потом когда-ниубдь в далеком будущем url изображения профиля
@@ -30,16 +30,16 @@ const authSlice = createSlice({
         state.success = false;
         state.userInfo = {
           login: '',
-          id: ''
+          id: '',
+          username: ''
         }
       })
       .addCase(registerUser.fulfilled, (state, action) => {
-        console.log(action.payload)
         state.loading = false;
         state.error = false;
         state.success = true;
-        state.token = action.payload.token;
-        state.userInfo = action.payload.userInfo;
+        state.isAuth = true;
+        state.userInfo = action.payload.user;
       })
       .addCase(registerUser.rejected, (state, action) => {
         state.loading = false;
@@ -47,7 +47,6 @@ const authSlice = createSlice({
         state.success = false;
         // Обработка ошибки, например, сохранение текста ошибки
         state.errorMessage = action.error.message;
-        console.log(action.error.message)
       })
       .addCase(loginUser.pending, (state) => {
         state.loading = true;
@@ -55,26 +54,42 @@ const authSlice = createSlice({
         state.success = false;
         state.userInfo = {
           login: '',
-          id: ''
+          id: '',
+          username: ''
         }
       })
       .addCase(loginUser.fulfilled, (state, action) => {
-        console.log(action.payload)
         state.loading = false;
         state.error = false;
         state.success = true;
-        state.token = action.payload.token;
-        state.userInfo = action.payload.userInfo;
+        state.isAuth = true;
+        state.userInfo = action.payload.user;
       })
-      .addCase(loginUser.rejected, (state, action) => {
+      .addCase(loginUser.rejected, (state, action: any) => {
         state.loading = false;
         state.error = true;
         state.success = false;
         // Обработка ошибки, например, сохранение текста ошибки
-        state.errorMessage = action.error.message;
-        console.log(action.error.message)
+        state.errorMessage = action.payload ? action.payload.errorMessage : 'Unknown error';
       })
-      
+      .addCase(chechAuth.pending, (state) => {
+        state.loading = true;
+        state.error = false;
+        state.success = false;
+        state.userInfo = {
+          login: '',
+          id: '',
+          username: ''
+        }
+      })
+      .addCase(chechAuth.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = false;
+        state.success = true;
+        state.isAuth = true;
+        state.userInfo = action.payload.user;
+      })
+      // давить Unauthorized
     }
 });
 

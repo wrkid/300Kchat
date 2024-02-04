@@ -9,13 +9,15 @@ import AppLabel300k from '../../UiKit/AppLabel300k';
 
 import './index.scss';
 
-import { loginUser } from '@/store/actions/authActions';
+import { loginUser } from '@/store/authActions/authActions';
 
 const LoginSection = () => {
 
   const [ mail, setMail ] = useState('');
   const [ password, setPassword ] = useState('');
   const [ _, setSecretPhrase ] = useState('');
+
+  const navigate = useNavigate();
 
   const handleInput = (name: string, value: string) => {
     if (name === 'login') {
@@ -37,8 +39,6 @@ const LoginSection = () => {
 
     dispatch(loginUser(body) as any)
   }
-
-  const navigate = useNavigate();
 
   return (
     <div className="login-section">

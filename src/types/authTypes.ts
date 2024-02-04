@@ -1,36 +1,33 @@
+export interface RootState {
+  auth: AuthState;
+}
+
 export interface AuthState {
   loading: boolean;
   error: boolean;
   success: boolean;
-  token: string;
-  userInfo: {
-    login: string;
-    id: string;
-  };
+  isAuth: boolean;
+  userInfo: IUser;
   errorMessage?: string; // опциональное свойство errorMessage
 }
-
-export interface IRegistrationBody {
-  login: string;
-  username: string;
-  password: string;
-};
 
 export interface ILoginBody {
   login: string,
   password: string
 };
 
-export interface ILogoutBody {
-  login: string,
-  password: string
+export interface IRegistrationBody extends ILoginBody{
+  username: string;
 };
 
-export interface ILoginResponse {
+export interface AuthResponse {
   accessToken: string;
   refreshToken: string;
-  user: {
-    login: string;
-    id: string;
-  }
+  user: IUser;
+}
+
+export interface IUser {
+  login: string;
+  username: string;
+  id: string;
 }

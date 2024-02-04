@@ -23,11 +23,9 @@ const FormInput: React.FC<IFormInput> = ({onChange, type = 'login'}) => {
 
 
   const icon = 
-    type === 'email' ? mailIcon : 
-    type === 'login' ? mailIcon :
+    type === 'email' || "login" ? mailIcon : 
     type === 'name' ? nameIcon :
-    type === 'password' ? passwordIcon :
-    type === 'password-repeat' ? passwordIcon :
+    type === 'password' || 'password-repeat' ? passwordIcon :
     mailIcon;
 
   const id = `${type}${Math.random()*10}`

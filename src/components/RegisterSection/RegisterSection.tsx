@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from 'react-redux'
-import { registerUser } from '@/store/actions/authActions';
+import { registerUser } from '@/store/authActions/authActions';
 import { useNavigate } from "react-router-dom";
 
 import FormInput from "@/UiKit/FormInput";
@@ -48,10 +48,11 @@ const RegisterSection = () => {
   };
 
   const handleSubmit = async () => {
-    if (password !== passwordRepeat) {
-      console.log('Пароли не совпадают');
-      // throw Error('Пароли не совпадают')
-    }
+    // if (password !== passwordRepeat) {
+    //   console.log(password, passwordRepeat)
+    //   console.log('Пароли не совпадают');
+    //   // throw Error('Пароли не совпадают')
+    // }
 
     const body: RegistrationData = {
       "login": login,
