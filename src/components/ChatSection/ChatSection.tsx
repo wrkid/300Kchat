@@ -7,7 +7,7 @@ import FormButton from '@/UiKit/FormButton/FormButton';
 import { logoutUser } from '@/store/authActions/authActions';
 
 import io from 'socket.io-client';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Message } from '@/types/messagesType';
 import { IUser } from '@/types/authTypes';
 import ChatMessage from '../ChatMessage';
@@ -21,8 +21,9 @@ const ChatSection = () => {
   const socket = io('http://localhost:2001', {
     withCredentials: true,
   });
-
+  
   useEffect(() => {
+
     const fetchMessages = async () => {
       try {
         const response = await axios.get('http://localhost:2001/chat/messages');
@@ -33,7 +34,7 @@ const ChatSection = () => {
     };
 
     fetchMessages();
-    //подписываемся на событие нового сообщения
+    // подписываемся на событие нового сообщения и пушим в стейт
     socket.on('chat message', (message) => {
       setMessages((prevMessages) => [...prevMessages, message]);
     });
@@ -55,6 +56,7 @@ const ChatSection = () => {
     // отправляем сообщение на сервер
     socket.emit('chat message', messageData);
 
+    // чистим инпут
     setValue('');
   };
 

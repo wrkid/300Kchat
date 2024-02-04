@@ -34,9 +34,12 @@
 .chat-section__inner__messages {
   height: 80%;
   width: 100%;
-  overflow: auto;
+  overflow: scroll;
+  overflow-anchor: 100px;
   display: flex;
   flex-direction: column;
+  border-top-left-radius: 49px;
+  border-top-right-radius: 49px;
 }
 
 .chat-section__inner__input {
