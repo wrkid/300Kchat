@@ -9,6 +9,15 @@
   justify-content: flex-end;
 }
 
+.chat-section__header {
+  width: 90%;
+  font-size: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
 .chat-section__inner {
   background-color: #fff;
   width: 831px;
@@ -22,11 +31,14 @@
   align-items: center;
 }
 
-.chat-section__header {
+.chat-section__inner__messages {
+  background-color: rgb(62, 169, 169);
+  height: 80%;
+  width: 100%;
+}
+
+.chat-section__inner__input {
+  height: 100px;
   width: 90%;
-  font-size: 24px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
+  margin-top: 5px;
 }
