@@ -1,6 +1,7 @@
 ============================== 
-/-- Описание Ui-Kit компонентов --/
+todo
 ===============================
+
 #AppLabel300k - иконка приложения
   size = 'small' / 'medium' / 'large' (default: medium)
 
@@ -9,11 +10,12 @@
   type = 'email' / 'password' / ... (default: email)
   
 #FormButton - кнопка формы
-
 color = 'dark' (синяя) / 'light'(белая) (default: dark)
 text - текст внутри кнопки
-onClick - //нужно сделать =============================
+onClick - //нужно сделать
+=============================
 
 ###ROUTING
+/chat - чат
 /login - Авторизация
 /registration - Регистрация
